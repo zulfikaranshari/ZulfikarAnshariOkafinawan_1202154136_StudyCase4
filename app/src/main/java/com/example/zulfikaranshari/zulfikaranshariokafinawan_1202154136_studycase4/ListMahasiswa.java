@@ -38,7 +38,7 @@ public class ListMahasiswa extends AppCompatActivity {
     }
 
 
-
+   //Memulai-AsyncTask
     public void startAsync(View view) {
         itemList = new ItemList();
         itemList.execute();
@@ -46,12 +46,12 @@ public class ListMahasiswa extends AppCompatActivity {
 
 
     public class ItemList extends AsyncTask<Void, String, Void> {
-
+        //Set-variable-untuk-counter-Adapter-dan-PrigressDialog
         private ArrayAdapter<String> mAdapter;
         private int mCounter = 1;
         ProgressDialog mDialog = new ProgressDialog(ListMahasiswa.this);
 
-
+        //Set-progress-dialog
         @Override
         protected void onPreExecute() {
             mAdapter = (ArrayAdapter<String>) mList.getAdapter();
@@ -61,7 +61,7 @@ public class ListMahasiswa extends AppCompatActivity {
             mDialog.setProgress(0);
             mDialog.show();
         }
-
+        //Menampilkan-data-di-array
         @Override
         protected Void doInBackground(Void... params) {
             for (String data : mahasiswa){
@@ -79,23 +79,23 @@ public class ListMahasiswa extends AppCompatActivity {
         protected void onProgressUpdate(String... values) {
             mAdapter.add(values[0]);
 
-            //menghitung persen pada dialog
+            //menghitung persen
             Integer status = (int) ((mCounter / (float) mahasiswa.length) * 100);
             mBar.setProgress(status);
 
-            //set status pada ProgressDialog
+            //set statu
             mDialog.setProgress(status);
 
-            //set message will not working when using horizontal loading
+          
             mDialog.setMessage(String.valueOf(status + "%"));
             mCounter++;
         }
         @Override
         protected void onPostExecute(Void aVoid) {
-            //hide progreebar
+            //menyembunyikan -progress-dialog
             mBar.setVisibility(View.GONE);
 
-            //remove progress dialog
+            //mwnghapus-progress-dialog
             mDialog.dismiss();
             mList.setVisibility(View.VISIBLE);
         }
