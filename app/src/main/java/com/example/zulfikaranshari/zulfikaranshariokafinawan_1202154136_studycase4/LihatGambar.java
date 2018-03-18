@@ -31,7 +31,7 @@ public class LihatGambar extends AppCompatActivity {
         btnImage = findViewById(R.id.btnSearch);
 
     }
-
+    //Mengambil-URL-dan-eksekusi-AsyncTask
     public void searchPic(View view) {
         imageLink = mURL.getText().toString();
 //        Picasso.get().load(imageLink).into(mImage);
@@ -42,11 +42,11 @@ public class LihatGambar extends AppCompatActivity {
 
     public class ImageDownloader extends AsyncTask<String, Void, String>{
 
-
+        //Mengambil-link-dari-Button-SearchPic
         @Override
         protected String doInBackground(String... params) {
             return params[0];
-        }
+        } //Mengambil-link-dan-set-gambar-menggunakan-Picasso
         @Override
         protected void onPostExecute(String imageLink) {
             super.onPostExecute(imageLink);
